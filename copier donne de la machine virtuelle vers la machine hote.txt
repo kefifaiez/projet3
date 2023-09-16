@@ -1,0 +1,15 @@
+Il semble que vous essayez de copier des fichiers vers le dossier `C:\Users\FAIEZ\Desktop\code complet` sur votre machine hôte. Cependant, l'erreur indique que le chemin n'a pas été trouvé. Pour résoudre ce problème, assurez-vous que le chemin est correct et que le dossier existe sur votre machine hôte.
+
+1. Tout d'abord, assurez-vous que le dossier `C:\Users\FAIEZ\Desktop\code complet` existe réellement sur votre machine hôte. Vous pouvez vérifier cela en utilisant l'Explorateur de fichiers.
+
+2. Assurez-vous également que le nom du dossier est correct, y compris les espaces. Dans votre commande `scp`, vous avez utilisé `/c/Users/FAIEZ/Desktop/code\ complet`. Les caractères d'échappement `\` ne sont généralement pas nécessaires dans les chemins Windows, vous pouvez donc essayer sans eux :
+
+   ```bash
+   scp -r vagrant@10.0.0.125:/home/vagrant/monweb/newwebsite "C:\Users\FAIEZ\Desktop\ansible_php_mysql_jenkins_pushdockerHub"
+   ```
+
+3. Si le dossier `C:\Users\FAIEZ\Desktop\code complet` n'existe pas, vous pouvez le créer manuellement à l'aide de l'Explorateur de fichiers.
+
+4. Assurez-vous également d'exécuter la commande `scp` depuis un terminal sur votre machine hôte, et non depuis votre machine virtuelle.
+
+Une fois que vous avez confirmé que le dossier de destination existe et que le chemin est correct, vous devriez pouvoir copier les fichiers avec succès depuis votre machine virtuelle vers votre machine hôte.

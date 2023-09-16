@@ -1,0 +1,52 @@
+---
+- name: Gérer les conteneurs Docker
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Connexion à Docker Hub
+      command: docker login -u kefifaiez -p kefi123123
+      ignore_errors: yes
+      register: docker_login_result
+
+    - name: Afficher le résultat de la connexion à Docker Hub
+      debug:
+        var: docker_login_result.stdout_lines
+
+    - name: Arrêter et supprimer les conteneurs Docker avec Docker Compose
+      command: docker-compose down
+      ignore_errors: yes
+
+    - name: Supprimer toutes les images Docker (sauf celles de Jenkins)
+      shell: docker images | grep -v 'jenkins' | awk '{print $3}' | xargs docker rmi -f
+      register: image_removal_result
+      ignore_errors: yes
+
+    - name: Afficher le résultat de la suppression des images
+      debug:
+        var: image_removal_result.stdout_lines
+
+    - name: Construction de l'image Docker
+      command: docker build -t my-web-app:latest .
+      ignore_errors: yes
+
+    - name: Afficher le résultat de la construction de l'image
+      debug:
+        var: ansible_date_time.epoch
+
+    - name: Créer un tag pour l'image Docker
+      command: docker tag my-web-app:latest kefifaiez/my-web-app:latest
+      ignore_errors: yes
+
+    - name: Pousser l'image vers Docker Hub
+      command: docker push kefifaiez/my-web-app:latest
+      ignore_errors: yes
+      register: docker_push_result
+
+    - name: Afficher le résultat de la poussée de l'image
+      debug:
+        var: docker_push_result.stdout_lines
+
+    - name: Redémarrer les conteneurs Docker avec Docker Compose
+      command: docker-compose up -d
+      ignore_errors: yes
+

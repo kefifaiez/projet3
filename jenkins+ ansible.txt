@@ -1,0 +1,59 @@
+Bien sûr, voici les trois solutions que vous avez demandées :
+
+**1. Installer Jenkins avec Docker :**
+
+Pour installer Jenkins en tant que conteneur Docker, exécutez la commande suivante dans votre terminal :
+
+```bash
+docker run -d -p 8080:8080 -p 50000:50000 --name jenkins jenkins/jenkins:lts
+```
+
+Cela lancera Jenkins en tant que conteneur Docker, exposant les ports 8080 et 50000.
+
+**2. Mettre à jour votre playbook Ansible (`mon_playbook.yml`) :**
+
+Voici le contenu de votre playbook Ansible mis à jour pour exclure la suppression de l'image Jenkins et pour ajouter une tâche de récupération du mot de passe de Jenkins :
+
+```yaml
+---
+- name: Gérer les conteneurs Docker
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Arrêter et supprimer les conteneurs Docker avec Docker Compose
+      command: docker-compose down
+      ignore_errors: yes
+
+    - name: Collecter la liste des images Docker (sauf celles de Jenkins)
+      shell: docker images | grep -v 'jenkins' | awk '{print $3}' | xargs docker rmi -f
+      register: image_removal_result
+      ignore_errors: yes
+
+    - name: Afficher le résultat de la suppression des images
+      debug:
+        var: image_removal_result.stdout_lines
+
+    - name: Redémarrer les conteneurs Docker avec Docker Compose
+      command: docker-compose up -d
+      ignore_errors: yes
+```
+
+**3. Récupérer le mot de passe administrateur de votre conteneur Jenkins :**
+
+Pour récupérer le mot de passe administrateur de votre conteneur Jenkins, suivez ces étapes :
+
+   a. Utilisez la commande `docker exec` pour accéder au conteneur Jenkins :
+
+   ```bash
+   docker exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+   ```
+
+   Assurez-vous que le conteneur Jenkins est en cours d'exécution et qu'il a été correctement nommé "jenkins" lors de sa création.
+
+   b. Copiez le mot de passe affiché dans la sortie.
+
+   c. Accédez à l'interface Web de Jenkins en ouvrant un navigateur et en accédant à l'URL `http://votre_adresse_ip:8080` (remplacez `votre_adresse_ip` par l'adresse IP de votre machine ou `localhost` si Jenkins s'exécute sur votre machine locale).
+
+   d. Sur la page d'accueil de Jenkins, collez le mot de passe administrateur que vous avez copié à l'étape b. Suivez les étapes de configuration initiale de Jenkins pour définir un nom d'utilisateur et un mot de passe administrateur personnalisés.
+
+Vous devriez maintenant avoir Jenkins installé et configuré en tant que conteneur Docker avec le mot de passe administrateur récupéré.

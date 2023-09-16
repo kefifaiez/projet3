@@ -1,0 +1,69 @@
+Pour pousser vos modifications vers le dépôt GitHub que vous avez indiqué (https://github.com/kefifaiez/newwebsite.git)>
+**Étape 1 : Configuration de Git**
+
+Si vous n'avez pas déjà configuré Git avec votre nom d'utilisateur et votre adresse e-mail, utilisez les commandes suiv>
+```bash
+git config --global user.name "kefifaiez"
+git config --global user.email "k.faiez@hotmail.fr"
+```
+
+Assurez-vous de remplacer `"kefifaiez"` par votre nom d'utilisateur GitHub et `"k.faiez@hotmail.fr"` par votre adresse >
+**Étape 2 : Ajout des fichiers au suivi Git**
+
+Ajoutez les fichiers que vous souhaitez inclure dans le commit en utilisant la commande `git add`. Par exemple, pour aj>
+```bash
+git add .
+```
+
+**Étape 3 : Création d'un commit**
+
+Créez un commit pour valider vos modifications avec un message descriptif :
+
+```bash
+git commit -m "Ajouter une description de votre modification ici"
+```
+
+**Étape 4 : Configuration du dépôt distant (GitHub)**
+
+Si vous n'avez pas encore configuré le dépôt distant GitHub, vous pouvez le faire en utilisant la commande `git remote >
+```bash
+git remote add origin https://github.com/kefifaiez/newwebsite.git
+```
+
+**Étape 5 : Pousser vers GitHub**
+
+Poussez vos modifications vers votre dépôt GitHub en utilisant `git push`. Assurez-vous d'indiquer la branche sur laque>
+```bash
+git push origin main
+```
+
+Assurez-vous de remplacer `main` par le nom de la branche sur laquelle vous travaillez si elle est différente.
+
+Après avoir suivi ces étapes, vos modifications seront poussées vers votre dépôt GitHub à l'URL https://github.com/kefi>
+
+
+
+
+
+
+L'erreur que vous rencontrez est due à l'authentification par mot de passe, qui n'est plus prise en charge pour GitHub >
+Pour résoudre ce problème, vous pouvez suivre ces étapes pour utiliser un token d'accès personnel (PAT) :
+
+1. Générez un token d'accès personnel sur GitHub en suivant ces étapes :
+   - Accédez à votre compte GitHub sur le site Web de GitHub.
+   - Cliquez sur votre photo de profil en haut à droite, puis sélectionnez "Settings" (Paramètres).
+   - Dans le menu de gauche, sélectionnez "Developer settings" (Paramètres du développeur).
+   - Cliquez sur "Personal access tokens" (Tokens d'accès personnels).
+   - Cliquez sur "Generate token" (Générer un token).
+   - Donnez un nom à votre token, sélectionnez les autorisations appropriées (au minimum, "repo" pour les dépôts) et gé>   - Copiez le token généré.
+
+2. Ensuite, configurez Git pour utiliser ce token comme moyen d'authentification en exécutant la commande suivante dans>
+```bash
+git config --global credential.helper store
+git credential approve
+```
+
+Cela enregistrera temporairement votre token d'accès personnel pour les opérations Git.
+
+3. Maintenant, lorsque vous exécutez `git push`, vous devrez entrer votre nom d'utilisateur GitHub (qui est "kefifaiez">
+Après avoir suivi ces étapes, vous devriez être en mesure de pousser vos modifications vers votre dépôt GitHub sans ren>

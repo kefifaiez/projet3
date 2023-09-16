@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  # Configuration du service Web 1
+  web1:
+    image: kefifaiez/my-web-app:latest
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+  # Configuration du service Web 2
+  web2:
+    image: kefifaiez/my-web-app:latest
+    ports:
+      - "8082:80"
+    depends_on:
+      - db
+
+  # Configuration du service de base de données
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: faiez
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Configuration de phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - "9090:80"
+
+  # Configuration de HAProxy
+  haproxy:
+    image: haproxy:latest
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "80:80"
+
+volumes:
+  db-data:
+
