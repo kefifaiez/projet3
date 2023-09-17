@@ -586,16 +586,17 @@ footer p{
         margin-left: 2rem;
     }
 	
-	    /* Ajoutez le style pour "je suis" sur une ligne distincte */
-    .home-content h3 {
-        display: block;
-        margin-bottom: 10px;
-    }
+ .home-content h3,
+            .home-content .multiple-text {
+                display: inline;
+                margin-right: 10px; /* Ajoutez une marge entre les éléments si nécessaire */
+            }
 
-    /* Style pour le reste du texte */
-    .home-content p {
-        display: inline;
-    }
+            .home-content p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
 }
 
 @media screen and (max-width: 552px) {
@@ -607,14 +608,16 @@ footer p{
         height: 82%;
         margin: auto;
     }
-	    /* Ajoutez le style pour "je suis" sur une ligne distincte */
-    .home-content h3 {
-        display: block;
-        margin-bottom: 10px;
-    }
+ .home-content h3,
+            .home-content .multiple-text {
+                display: inline;
+                margin-right: 10px; /* Ajoutez une marge entre les éléments si nécessaire */
+            }
 
-    /* Style pour le reste du texte */
-    .home-content p {
-        display: inline;
+            .home-content p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
     }
 }
