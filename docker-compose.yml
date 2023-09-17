@@ -48,7 +48,7 @@ services:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
       - "80:80"
+    command: sh -c "haproxy -f /usr/local/etc/haproxy/haproxy.cfg && sleep 5 && docker-compose restart haproxy"
 
 volumes:
   db-data:
-
