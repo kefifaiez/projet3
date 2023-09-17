@@ -50,3 +50,7 @@
       command: docker-compose up -d
       ignore_errors: yes
 
+    - name: Redémarrer le service haproxy avec Docker Compose
+      command: docker-compose restart haproxy
+      ignore_errors: yes
+
