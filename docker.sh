@@ -30,7 +30,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 #La commande usermod -aG docker faiez permet d'ajouter l'utilisateur faiez au groupe docker sur le système
 usermod -aG docker faiez
-sudo usermod -aG docker $(whoami)
+#sudo usermod -aG docker $(whoami)
 
 sudo newgrp docker
 
