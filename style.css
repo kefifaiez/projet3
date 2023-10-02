@@ -306,7 +306,7 @@ span {
     margin-bottom: 5rem;
 }
 
-/* Conteneur des services */
+/******************************** Conteneur des services ***********************************************/
 .services-container {
     display: flex;
     justify-content: center; /* Centre horizontalement les éléments */
@@ -316,22 +316,27 @@ span {
 }
 
 /* Boîte de service */
-.services-container .services-box {
-    flex: 1 1 30rem; /* Propriétés flex pour le dimensionnement automatique des boîtes de service */
-    background: var(--second-bg-color); /* Couleur d'arrière-plan de la boîte de service */
-    padding: 3rem 2rem 4rem; /* Rembourrage de la boîte de service */
+.services-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Ajuste la hauteur des boîtes de service pour qu'elles soient toutes de la même hauteur */
 }
 
 /* Style pour les boîtes de service */
 .services-container .services-box {
-    flex: 1 1 30rem; /* Propriétés flex pour le dimensionnement automatique des boîtes de service */
-    background: var(--second-bg-color); /* Couleur d'arrière-plan de la boîte de service */
-    padding: 3rem 2rem 4rem; /* Rembourrage (haut, droite, bas, gauche) de la boîte de service */
-    border-radius: 2rem; /* Rayon de bordure pour arrondir les coins de la boîte de service */
-    text-align: center; /* Centrer le contenu (titre, icône, etc.) horizontalement dans la boîte */
-    border: 0.2rem solid var(--bg-color); /* Bordure solide de 0.2rem avec la couleur de l'arrière-plan du body (--bg-color) */
+    flex: 1;
+    background: var(--second-bg-color);
+    padding: 3rem 2rem 4rem;
+    border-radius: 2rem;
+    text-align: center;
+    border: 0.2rem solid var(--bg-color);
     transition: 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre le contenu verticalement */
 }
+
+
 
 .services-container .services-box:hover {
 border-color: var(--main-color);
@@ -348,8 +353,11 @@ transform: scale(1.02);
     font-size: 2.6rem;
 }
 .services-box p{
-    font-size: 1.6;
+    font-size: 1.6rem;
     margin: 1rem 0 3rem;
+}
+.services-box .btn {
+ margin-top: auto; /* Alignez le bouton au bas de la boîte de service */
 }
   
 /*------------ portfolio ---------*/
@@ -426,11 +434,11 @@ transform: scale(1.02);
   
 
 .portfolio-layer h4 {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .portfolio-layer p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin: 0.3rem 0 1rem;
 }
 
@@ -586,6 +594,16 @@ footer p{
         margin-left: 2rem;
     }
 	
+	    /* Ajoutez le style pour "je suis" sur une ligne distincte */
+    .home-content h3 {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Style pour le reste du texte */
+    .home-content p {
+        display: inline;
+    }
 }
 
 @media screen and (max-width: 552px) {
@@ -597,6 +615,27 @@ footer p{
         height: 82%;
         margin: auto;
     }
- 
+	    /* Ajoutez le style pour "je suis" sur une ligne distincte */
+    .home-content h3 {
+        display: block;
+        margin-bottom: 10px;
     }
+
+    /* Style pour le reste du texte */
+    .home-content p {
+        display: inline;
+    }
+	    .navbar a {
+        font-size: 1.4rem;
+        margin-left: 1.5rem;
+    }
+	 /* Style pour h4 et p */
+	.portfolio-layer h4 {
+    font-size: 1.5rem;
+	}
+
+.portfolio-layer p {
+    font-size: 1.2rem;
+    margin: 0.3rem 0 1rem;
+	}
 }
