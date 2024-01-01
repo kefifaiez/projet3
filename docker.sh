@@ -39,6 +39,7 @@ curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-comp
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 #La commande chmod +x /usr/bin/docker-compose ajoute l'autorisation d'exécution (ou "permission d'exécution") pour le fichier docker-compose.
 chmod +x /usr/bin/docker-compose
+sudo chmod 777 /var/run/docker.sock
 
 
 
